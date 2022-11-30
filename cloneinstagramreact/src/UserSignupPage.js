@@ -22,6 +22,7 @@ class UserSignupPage extends React.Component {
                     <input name="username" onChange={this.onChange}/>
                 </div>
                 <div>
+
                     <label>Display Name: </label>
                     <input name="displayName" onChange={this.onChange}/>
                 </div>
