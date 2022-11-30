@@ -22,7 +22,7 @@ class UserSignupPage extends React.Component {
                     <input name="username" onChange={this.onChange}/>
                 </div>
                 <div>
-                    <label>Display Name1 : </label>
+                    <label>Display Name : </label>
                     <input name="displayName" onChange={this.onChange}/>
                 </div>
                 <div>
