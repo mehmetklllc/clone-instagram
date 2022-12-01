@@ -8,5 +8,4 @@ public class User {
     private String username;
     private String displayName;
     private String password;
-    private String passwordRepeat;
 }
