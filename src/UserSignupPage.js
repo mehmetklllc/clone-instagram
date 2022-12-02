@@ -31,6 +31,7 @@ class UserSignupPage extends React.Component {
             <div className="border border-3 rounded ">
                 <div className="container">
                     <form>
+                        <h1 className="text-center">Instagram</h1>
                         <h1 className="text-center">Sign Up</h1>
                         <div className="mb-3">
                             <label className="form-label">Username : </label>
