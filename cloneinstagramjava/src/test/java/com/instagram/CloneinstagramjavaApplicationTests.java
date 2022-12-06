@@ -11,4 +11,10 @@ class CloneinstagramjavaApplicationTests {
         System.out.println("test");
     }
 
+
+    @Test
+    void repeatTest(){
+        System.out.println("Repeat Test Running");
+    }
+
 }
