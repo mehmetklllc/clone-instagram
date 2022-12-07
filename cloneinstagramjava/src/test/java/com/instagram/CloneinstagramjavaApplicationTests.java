@@ -17,4 +17,9 @@ class CloneinstagramjavaApplicationTests {
         System.out.println("Repeat Test Running");
     }
 
+    @Test
+    void repeatTestınstagram(){
+        System.out.println("Repeat Test Instagram Running");
+    }
+
 }
