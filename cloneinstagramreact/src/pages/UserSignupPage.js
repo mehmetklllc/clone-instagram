@@ -76,7 +76,6 @@ class UserSignupPage extends React.Component {
                                     <span class="spinner-border spinner-border-sm"></span>} Sing Up
                             </button>
                         </div>
-                    
 
                     </form>
                 </div>
