@@ -24,7 +24,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User createUser(UserCreateRequestDto reqeust) {
-        User user = UserMapper.INSTANCE.userDtoToUser( reqeust );
+        User user = UserMapper.USER_INSTANCE.userDtoToUser( reqeust );
         if(userRepository.findByUsername(user.getUsername()).isPresent())
             throw new IllegalArgumentException(InsConstans.USERNAME_MUST_BE_UNIQUE);
 
