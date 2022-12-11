@@ -3,6 +3,7 @@ package com.instagram.service;
 import com.instagram.dto.InsConstans;
 import com.instagram.dto.UserCreateRequestDto;
 import com.instagram.entities.User;
+import com.instagram.mapper.UserMapper;
 import com.instagram.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -23,13 +24,10 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User createUser(UserCreateRequestDto reqeust) {
-
-        if(userRepository.findByUsername(reqeust.getUsername()).isPresent())
+        User user = UserMapper.INSTANCE.userDtoToUser( reqeust );
+        if(userRepository.findByUsername(user.getUsername()).isPresent())
             throw new IllegalArgumentException(InsConstans.USERNAME_MUST_BE_UNIQUE);
 
-        User user = new User();
-        user.setUsername(reqeust.getUsername());
-        user.setDisplayName(reqeust.getDisplayName());
         user.setPassword(passwordEncoder.encode(reqeust.getPassword()));
         userRepository.save(user);
         return user;
