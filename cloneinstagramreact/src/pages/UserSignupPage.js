@@ -1,9 +1,9 @@
 import React from "react";
-import axios from "axios";
+import {signUp} from "../api/userApi";
 
 class UserSignupPage extends React.Component {
     state = {
-        username: null, displayName: null, password: null, passwordRepeat: null
+        username: null, displayName: null, password: null, passwordRepeat: null, pendingApiCall: false, login: ""
     }
 
     onChange = event => {
@@ -14,7 +14,7 @@ class UserSignupPage extends React.Component {
         });
     }
 
-    onClickSignup = event => {
+    onClickSignup = async event => {
         event.preventDefault();
         const {username, displayName, password} = this.state;
         const body = {
@@ -22,13 +22,27 @@ class UserSignupPage extends React.Component {
             displayName,
             password
         }
-        axios.post('/api/create-user', body);
+        this.setState({pendingApiCall: true});
+        try {
+
+            const response = await signUp(body);
+        } catch (error) {
+
+        }
+        this.setState({pendingApiCall: false});
+
+        /*signUp(body)
+            .then(response => {
+                this.setState({pendingApiCall: false, login: "memo"})
+            }).catch(error => {
+            this.setState({pendingApiCall: false})
+        });*/
     };
 
     render() {
-
+        const {pendingApiCall} = this.state;
         return (
-            <div className="border border-3 rounded ">
+            <div className="border border-3 rounded">
                 <div className="container">
                     <form>
                         <h1 className="text-center">Instagram</h1>
@@ -53,7 +67,17 @@ class UserSignupPage extends React.Component {
                                    onChange={this.onChange}/>
                         </div>
                         <div className="text-center">
-                            <button className="btn btn-outline-primary" onClick={this.onClickSignup}>Sing Up</button>
+                            <button
+                                className="btn btn-primary"
+                                onClick={this.onClickSignup}
+                                disabled={pendingApiCall}
+                            >
+                                {pendingApiCall &&
+                                    <span class="spinner-border spinner-border-sm"></span>} Sing Up
+                            </button>
+                        </div>
+                        <div className="mb-3">
+                            <label className="form-label">{this.state.login} </label>
                         </div>
 
                     </form>
