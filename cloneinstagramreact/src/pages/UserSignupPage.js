@@ -76,9 +76,7 @@ class UserSignupPage extends React.Component {
                                     <span class="spinner-border spinner-border-sm"></span>} Sing Up
                             </button>
                         </div>
-                        <div className="mb-3">
-                            <label className="form-label">{this.state.login} </label>
-                        </div>
+                    
 
                     </form>
                 </div>
