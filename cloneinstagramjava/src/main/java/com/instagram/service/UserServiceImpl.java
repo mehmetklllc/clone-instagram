@@ -23,12 +23,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User createUser(UserCreateRequestDto reqeust) {
-        User user = UserMapper.USER_INSTANCE.userDtoToUser( reqeust );
+    public User createUser(UserCreateRequestDto request) {
+
+        User user = UserMapper.USER_INSTANCE.userDtoToUser( request );
         if(userRepository.findByUsername(user.getUsername()).isPresent())
             throw new IllegalArgumentException(InsConstans.USERNAME_MUST_BE_UNIQUE);
 
-        user.setPassword(passwordEncoder.encode(reqeust.getPassword()));
+        user.setPassword(passwordEncoder.encode(request.getPassword()));
         userRepository.save(user);
         return user;
     }

@@ -24,6 +24,9 @@ public class UserController {
 
     @PostMapping("/api/create-user")
     public ResponseEntity<Object> createUser(@RequestBody UserCreateRequestDto request) {
+        if(request.getUsername()==null || request.getUsername().isEmpty()){
+            return InsResponseEntity.response("Username cannot be null!", HttpStatus.BAD_REQUEST,null);
+        }
         User user = userService.createUser(request);
         log.info(request.toString());
         return InsResponseEntity.response("success", HttpStatus.CREATED,user);
