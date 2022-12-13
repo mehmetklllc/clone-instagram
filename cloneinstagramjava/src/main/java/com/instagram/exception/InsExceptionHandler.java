@@ -31,7 +31,6 @@ public class InsExceptionHandler extends ResponseEntityExceptionHandler {
         if (exceptionMessageDesc == null) exceptionMessageDesc = ex.toString();
 
         InsErrorMessage errorMessage = new InsErrorMessage(new Date(), exceptionMessageDesc, null);
-
         return new ResponseEntity<>(errorMessage, new HttpHeaders(), HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }
