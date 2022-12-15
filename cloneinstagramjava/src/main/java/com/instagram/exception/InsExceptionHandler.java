@@ -3,6 +3,7 @@ package com.instagram.exception;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
@@ -15,6 +16,17 @@ public class InsExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(IllegalArgumentException.class)
     public ResponseEntity<Object> illegalArgumentException(
+            Exception ex) {
+        String exceptionMessageDesc = ex.getLocalizedMessage();
+        if (exceptionMessageDesc == null) exceptionMessageDesc = ex.toString();
+
+        InsErrorMessage errorMessage = new InsErrorMessage(new Date(), exceptionMessageDesc, null);
+
+        return new ResponseEntity<>(errorMessage, new HttpHeaders(), HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<Object> methodArgumentNotValidException(
             Exception ex) {
         String exceptionMessageDesc = ex.getLocalizedMessage();
         if (exceptionMessageDesc == null) exceptionMessageDesc = ex.toString();

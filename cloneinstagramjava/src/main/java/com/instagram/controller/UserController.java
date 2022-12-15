@@ -4,6 +4,7 @@ import com.instagram.dto.InsResponseEntity;
 import com.instagram.dto.UserCreateRequestDto;
 import com.instagram.entities.User;
 import com.instagram.service.UserService;
+import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,10 +24,8 @@ public class UserController {
     UserService userService;
 
     @PostMapping("/api/create-user")
-    public ResponseEntity<Object> createUser(@RequestBody UserCreateRequestDto request) {
-        if(request.getUsername()==null || request.getUsername().isEmpty()){
-            return InsResponseEntity.response("Username cannot be null!", HttpStatus.BAD_REQUEST,null);
-        }
+    public ResponseEntity<Object> createUser(@Valid @RequestBody UserCreateRequestDto request) {
+
         User user = userService.createUser(request);
         log.info(request.toString());
         return InsResponseEntity.response("success", HttpStatus.CREATED,user);
