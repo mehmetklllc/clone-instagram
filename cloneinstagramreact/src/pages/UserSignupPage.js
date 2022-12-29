@@ -40,7 +40,7 @@ class UserSignupPage extends React.Component {
 
             this.setState({errors: error.response.data});
             toast.error(error.response.data.message, {
-                position: toast.POSITION.TOP_RIGHT
+                position: toast.POSITION.BOTTOM_RIGHT
             });
 
         }
