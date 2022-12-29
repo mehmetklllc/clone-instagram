@@ -1,6 +1,8 @@
 import React from "react";
 import {signUp} from "../api/userApi";
 import Input from "../components/InsInput";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 class UserSignupPage extends React.Component {
     state = {
@@ -11,27 +13,36 @@ class UserSignupPage extends React.Component {
 
     onChange = event => {
         const {name, value} = event.target;
-
         this.setState({
             [name]: value
         });
     }
 
+
     onClickSignup = async event => {
         event.preventDefault();
-        const {username, displayName, password} = this.state;
+        const {username, displayName, password,passwordRepeat} = this.state;
         const body = {
             username,
             displayName,
-            password
+            password,
+            passwordRepeat
         }
+
+
         this.setState({pendingApiCall: true});
         try {
 
             const response = await signUp(body);
         } catch (error) {
-            console.log(error.response.data);
+            const a=error.response.data;
+            console.log(a.message);
+
             this.setState({errors: error.response.data});
+            toast.error(error.response.data.message, {
+                position: toast.POSITION.TOP_RIGHT
+            });
+
         }
         this.setState({pendingApiCall: false});
 
@@ -44,15 +55,16 @@ class UserSignupPage extends React.Component {
     };
 
     render() {
-        const {pendingApiCall, errors} = this.state;
-        const {message} = errors;
+        const {pendingApiCall} = this.state;
         return (
+
             <div className="border border-3 rounded">
                 <div className="container">
                     <form>
                         <h1 className="text-center">Instagram</h1>
                         <h1 className="text-center">Sign Up</h1>
-                        <Input name="username" label="Username" onChange={this.onChange} error={message}></Input>
+
+                        <Input name="username" label="Username" onChange={this.onChange}></Input>
 
                         <div className="mb-3">
                             <label className="form-label">Display Name: </label>
@@ -83,6 +95,7 @@ class UserSignupPage extends React.Component {
 
                     </form>
                 </div>
+                <ToastContainer />
             </div>);
     }
 }
