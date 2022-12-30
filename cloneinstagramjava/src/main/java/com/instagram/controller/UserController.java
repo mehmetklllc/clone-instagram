@@ -24,10 +24,14 @@ public class UserController {
 
     private static final Logger log = LoggerFactory.getLogger(UserController.class);
 
+    private final UserService userService;
+    private final LocalizationResolver localizationResolver;
+
     @Autowired
-    UserService userService;
-    @Autowired
-    LocalizationResolver localizationResolver;
+    public UserController(LocalizationResolver localizationResolver, UserService userService) {
+        this.localizationResolver = localizationResolver;
+        this.userService = userService;
+    }
 
     @PostMapping("/api/create-user")
     public ResponseEntity<Object> createUser(@Valid @RequestBody UserCreateRequestDto request) {
