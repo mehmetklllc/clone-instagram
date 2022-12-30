@@ -8,10 +8,10 @@ import java.util.Map;
 
 public class InsResponseEntity {
 
-    public static ResponseEntity<Object> response(String message, HttpStatus status, Object responseObj) {
+    public static ResponseEntity<Object> response(String code, String message, HttpStatus status, Object responseObj) {
         Map<String, Object> map = new HashMap<String, Object>();
-        map.put("message", message);
-        map.put("status", status.value());
+        map.put("responseCode", code);
+        map.put("responseMessage", message);
         map.put("data", responseObj);
 
         return new ResponseEntity<Object>(map, status);

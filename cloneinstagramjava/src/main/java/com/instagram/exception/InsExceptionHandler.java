@@ -1,19 +1,14 @@
 package com.instagram.exception;
 
-import org.springframework.http.HttpHeaders;
+import com.instagram.dto.InsResponseCode;
+import com.instagram.dto.InsResponseEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.MethodArgumentNotValidException;
-import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
-import java.time.LocalDateTime;
 import java.util.Date;
-import java.util.LinkedHashMap;
-import java.util.Map;
 
 @RestControllerAdvice
 public class InsExceptionHandler extends ResponseEntityExceptionHandler {
@@ -25,8 +20,7 @@ public class InsExceptionHandler extends ResponseEntityExceptionHandler {
         if (exceptionMessageDesc == null) exceptionMessageDesc = ex.toString();
 
         InsErrorMessage errorMessage = new InsErrorMessage(new Date(), exceptionMessageDesc, null);
-
-        return new ResponseEntity<>(errorMessage, new HttpHeaders(), HttpStatus.BAD_REQUEST);
+        return  InsResponseEntity.response(InsResponseCode.BAD_REQUEST.getCode(), InsResponseCode.BAD_REQUEST.getMessage(), HttpStatus.BAD_REQUEST, errorMessage);
     }
 
 
@@ -37,7 +31,7 @@ public class InsExceptionHandler extends ResponseEntityExceptionHandler {
         if (exceptionMessageDesc == null) exceptionMessageDesc = ex.toString();
 
         InsErrorMessage errorMessage = new InsErrorMessage(new Date(), exceptionMessageDesc, null);
-        return new ResponseEntity<>(errorMessage, new HttpHeaders(), HttpStatus.INTERNAL_SERVER_ERROR);
+        return  InsResponseEntity.response(InsResponseCode.SYSTEM_ERROR.getCode(), InsResponseCode.SYSTEM_ERROR.getMessage(), HttpStatus.BAD_REQUEST, errorMessage);
 
     }
 

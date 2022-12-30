@@ -15,11 +15,8 @@ public class LocalizationResolver {
         this.applicationContext = applicationContext;
     }
 
-    public String resolve(Enum key) {
-        return key == null ? "" : this.applicationContext.getMessage(key.getClass().getName() + "." + key.name(), (Object[]) null, LocaleContextHolder.getLocale());
-    }
-
     public String resolve(String key) {
-        return key == null ? "" : this.applicationContext.getMessage(key, (Object[]) null, LocaleContextHolder.getLocale());
+        String keyProcess = key.replace("{", "").replace("}", "");
+        return keyProcess == null ? "" : this.applicationContext.getMessage(keyProcess, (Object[]) null, LocaleContextHolder.getLocale());
     }
 }

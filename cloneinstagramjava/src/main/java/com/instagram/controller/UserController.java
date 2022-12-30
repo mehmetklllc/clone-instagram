@@ -1,6 +1,7 @@
 package com.instagram.controller;
 
 import com.instagram.config.LocalizationResolver;
+import com.instagram.dto.InsResponseCode;
 import com.instagram.dto.InsResponseEntity;
 import com.instagram.dto.UserCreateRequestDto;
 import com.instagram.entities.User;
@@ -38,7 +39,7 @@ public class UserController {
 
         User user = userService.createUser(request);
         log.info(request.toString());
-        return InsResponseEntity.response("success", HttpStatus.CREATED, user);
+        return InsResponseEntity.response(InsResponseCode.SUCCESS.getCode(),InsResponseCode.SUCCESS.getMessage(), HttpStatus.CREATED, user);
     }
 
     @GetMapping("/api/test")
