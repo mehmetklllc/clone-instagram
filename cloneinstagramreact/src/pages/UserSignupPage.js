@@ -1,5 +1,5 @@
 import React from "react";
-import {signUp} from "../api/userApi";
+import {signUp, changeLanguage} from "../api/userApi";
 import Input from "../components/InsInput";
 import {ToastContainer, toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -61,6 +61,7 @@ class UserSignupPage extends React.Component {
     onChangeLanguage = language => {
         const {i18n} = this.props;
         i18n.changeLanguage(language);
+        changeLanguage(language);
     }
 
     render() {
