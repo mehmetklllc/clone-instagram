@@ -35,11 +35,11 @@ class UserSignupPage extends React.Component {
 
             const response = await signUp(body);
         } catch (error) {
-            const a=error.response.data;
+            const a=error.response.data.data;
             console.log(a.message);
 
             this.setState({errors: error.response.data});
-            toast.error(error.response.data.message, {
+            toast.error(error.response.data.data.message, {
                 position: toast.POSITION.BOTTOM_RIGHT
             });
 

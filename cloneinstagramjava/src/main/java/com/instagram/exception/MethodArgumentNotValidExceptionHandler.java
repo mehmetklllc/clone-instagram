@@ -1,7 +1,11 @@
 package com.instagram.exception;
 
+import com.instagram.dto.InsResponseCode;
+import com.instagram.dto.InsResponseEntity;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -21,18 +25,18 @@ public class MethodArgumentNotValidExceptionHandler {
     @ResponseStatus(BAD_REQUEST)
     @ResponseBody
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public InsErrorMessage methodArgumentNotValidException(MethodArgumentNotValidException ex) {
+    public ResponseEntity<Object> methodArgumentNotValidException(MethodArgumentNotValidException ex) {
         BindingResult result = ex.getBindingResult();
         List<org.springframework.validation.FieldError> fieldErrors = result.getFieldErrors();
         return processFieldErrors(fieldErrors);
     }
 
-    private InsErrorMessage processFieldErrors(List<org.springframework.validation.FieldError> fieldErrors) {
+    private ResponseEntity<Object> processFieldErrors(List<org.springframework.validation.FieldError> fieldErrors) {
         InsErrorMessage error = null;
-        for (org.springframework.validation.FieldError fieldError: fieldErrors) {
-            error=  new InsErrorMessage(new Date(),fieldError.getDefaultMessage(),fieldError.getField());
+        for (org.springframework.validation.FieldError fieldError : fieldErrors) {
+            error = new InsErrorMessage(new Date(), fieldError.getDefaultMessage(), fieldError.getField());
         }
-        return error;
+        return InsResponseEntity.response(InsResponseCode.BAD_REQUEST.getCode(), InsResponseCode.BAD_REQUEST.getMessage(), HttpStatus.BAD_REQUEST, error);
     }
 
 
