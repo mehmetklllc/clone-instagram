@@ -6,11 +6,18 @@ i18n.use(initReactI18next).init({
         en: {
             translations: {
                 'Sign Up': 'Sign Up',
+                'Display Name': 'Display Name',
+                'Password': 'Password',
+                'Password Repeat': 'Password Repeat',
                 'Username':'Username'
+
             }
         }, tr: {
             translations: {
                 'Sign Up': 'Kayıt Ol',
+                'Display Name': 'Görünen İsim',
+                'Password': 'Şifre',
+                'Password Repeat': 'Şifre Tekrarı',
                 'Username':'Kullanıcı Adı'
             }
         }

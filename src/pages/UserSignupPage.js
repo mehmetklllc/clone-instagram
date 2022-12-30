@@ -4,6 +4,7 @@ import Input from "../components/InsInput";
 import {ToastContainer, toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import {withTranslation} from 'react-i18next'
+import logo from "../logo.svg";
 
 class UserSignupPage extends React.Component {
     state = {
@@ -56,51 +57,86 @@ class UserSignupPage extends React.Component {
         });*/
     };
 
+
+    onChangeLanguage = language => {
+        const {i18n} = this.props;
+        i18n.changeLanguage(language);
+    }
+
     render() {
         const {pendingApiCall} = this.state;
         return (
-
-            <div className="border border-3 rounded">
-                <div className="container">
-                    <form>
-                        <h1 className="text-center">Instagram</h1>
-                        <h1 className="text-center">{this.props.t('Sign Up')}</h1>
-
-                        <div className="mb-3">
-                            <label className="form-label">{this.props.t('Username')}</label>
-                            <Input className="form-control" name="username"  onChange={this.onChange}></Input>
+            <div className="container">
+                <div className="row">
+                    <div className="col">
+                        <img
+                            src="https://imageio.forbes.com/specials-images/imageserve/5fac4edfacc6b52b3dbbdfb5/instagram-reels/960x0.jpg?format=jpg&width=600"/>
+                        <br/>
+                        <div className="container">
+                            <div className="col">a</div>
+                            <div className="col">b</div>
                         </div>
-                        <div className="mb-3">
-                            <label className="form-label">Display Name: </label>
-                            <input className="form-control" name="displayName" onChange={this.onChange}/>
-                        </div>
-                        <div className="mb-3">
-                            <label className="form-label">Password : </label>
-                            <input className="form-control" type="password" name="password" onChange={this.onChange}
-                                   aria-describedby="passwordHelpBlock"/>
-                        </div>
+                    </div>
+                    <div className="col-5">
+                        <div className="border border-3 rounded p-lg-5">
+                            <div className="container">
+                                <form>
 
-                        <div className="mb-3">
-                            <label className="form-label">Password Repeat : </label>
-                            <input className="form-control" type="password" name="passwordRepeat"
-                                   onChange={this.onChange}/>
-                        </div>
-                        <div className="text-center">
-                            <button
-                                className="btn btn-primary"
-                                onClick={this.onClickSignup}
-                                disabled={pendingApiCall}
-                            >
-                                {pendingApiCall &&
-                                    <span class="spinner-border spinner-border-sm"></span>} Sing Up
-                            </button>
-                        </div>
+                                    <h1 className="text-center">Instagram</h1>
+                                    <h1 className="text-center">{this.props.t('Sign Up')}</h1>
 
+                                    <div className="mb-3">
+                                        <label className="form-label">{this.props.t('Username')}</label>
+                                        <Input className="form-control" name="username"
+                                               onChange={this.onChange}></Input>
+                                    </div>
+                                    <div className="mb-3">
+                                        <label className="form-label">{this.props.t('Display Name')}</label>
+                                        <input className="form-control" name="displayName" onChange={this.onChange}/>
+                                    </div>
+                                    <div className="mb-3">
+                                        <label className="form-label">{this.props.t('Password')}</label>
+                                        <input className="form-control" type="password" name="password"
+                                               onChange={this.onChange}
+                                               aria-describedby="passwordHelpBlock"/>
+                                    </div>
 
-                    </form>
+                                    <div className="mb-3">
+                                        <label className="form-label">{this.props.t('Password Repeat')}</label>
+                                        <input className="form-control" type="password" name="passwordRepeat"
+                                               onChange={this.onChange}/>
+                                    </div>
+                                    <div className="text-center">
+                                        <button
+                                            className="btn btn-primary"
+                                            onClick={this.onClickSignup}
+                                            disabled={pendingApiCall}
+                                        >
+                                            {pendingApiCall &&
+                                                <span className="spinner-border spinner-border-sm"></span>}
+                                            {this.props.t('Sing Up')}
+                                        </button>
+                                        <div>
+                                            <br/>
+                                            <br/>
+                                            <img src="https://flagsapi.com/TR/flat/24.png"
+                                                 onClick={() => this.onChangeLanguage('tr')}/>
+                                            <img src="https://flagsapi.com/GB/flat/24.png"
+                                                 onClick={() => this.onChangeLanguage('en')}/>
+
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <ToastContainer/>
+                        </div>
+                    </div>
+
                 </div>
-                <ToastContainer/>
-            </div>);
+
+            </div>
+
+        );
     }
 }
 
