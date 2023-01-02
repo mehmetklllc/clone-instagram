@@ -6,11 +6,13 @@ import App from './App';
 import UserSignUpPage from './pages/UserSignupPage'
 import reportWebVitals from './reportWebVitals';
 import './i18n'
+import LoginPage from "./pages/LoginPage";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     <React.StrictMode>
-        <UserSignUpPage/>
+        <LoginPage/>
+        {/*<UserSignUpPage/>*/}
         {/*  <App/>*/}
     </React.StrictMode>
 );
