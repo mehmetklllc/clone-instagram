@@ -11,8 +11,8 @@ import LoginPage from "./pages/LoginPage";
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     <React.StrictMode>
-        <LoginPage/>
-        {/* <UserSignUpPage/>*/}
+        {/*<LoginPage/>*/}
+         <UserSignUpPage/>
         {/*  <App/>*/}
     </React.StrictMode>
 );
